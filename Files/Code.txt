@@ -1,0 +1,11 @@
+? no commentary from the peanut gallery
+def s = 22.44;
+def s1 = 33.5;
+?m = 22..44;
+def y = 12;
+def l = 15 / 18;
+def x = 22 + 44 ;
+def j = "Hi there !!!" ;
+def x1 = "Hi there"; 
+redef x1 = "See you later";
+print "Hi";

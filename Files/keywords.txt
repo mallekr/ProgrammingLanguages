@@ -1,0 +1,3 @@
+def,Defines a variable
+redef,Re-defines a variable
+print,Prints to the screen
