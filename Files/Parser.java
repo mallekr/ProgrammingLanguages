@@ -14,6 +14,7 @@ public class Parser {
     private LinkedList<Token> pLine = new LinkedList<Token>();
     private Token getKeyword;
     private Token work;
+    private Expression express;
     private Map<String, String[]> table = new HashMap<String, String[]>();
 
     public Parser() {
@@ -23,9 +24,10 @@ public class Parser {
     public Parser(LinkedList<Token> list) throws Exception {
         parseList = (LinkedList<Token>) list.clone();
         while(!parseList.isEmpty()){
+
             getKeyword = parseList.getFirst();
             if (getKeyword.typeString() != "Keyword"){
-                error("Expetected Keyword");
+                error("Expected Keyword");
             }
             else{
                 getKeyword = parseList.peekFirst();
@@ -43,17 +45,19 @@ public class Parser {
     private void checker(LinkedList<Token> check) throws Exception {
         work = check.getFirst();
         Token last = check.getLast();
-        if(last.typeString().toLowerCase() != "endline"){
+        if(last.typeString() != "Endline"){
             error("Expected ; at end of line.");
         }
 
-        if (work.typeString() == "def") {
+        if (work.getValue().equals("def")) {
+            check.pop();
+            
             define(check);
         } 
-        else if (work.typeString() == "redef") {
+        else if (work.getValue() == "redef") {
 
         } 
-        else if (work.typeString() == "print") {
+        else if (work.getValue() == "print") {
 
         } 
         else {
@@ -64,7 +68,8 @@ public class Parser {
     }
 
     private void define(LinkedList<Token> define) throws Exception {
-        String name = define.peekFirst().getValue();
+        express = new Expression(define);
+        /*String name = define.peekFirst().getValue();
         String type = "ID";
         String value = define.peekFirst().getValue();
         table.forEach((k, v) -> {
@@ -80,12 +85,16 @@ public class Parser {
                 table.put(name, in);
             }
         });
+        */
     }
 
     private void redefine(LinkedList<Token> re){
 
     }
 
+    private void express(LinkedList<Token> exp){
+
+    }
     public static void error(String e) throws Exception {
         throw new Exception(e);
         //System.exit(1);
